@@ -1,12 +1,13 @@
 // YOUR_BASE_DIRECTORY/netlify/functions/api.ts
 
 import express, { Router } from "express";
+const app = express();
 import serverless from "serverless-http";
 
 const api = express();
 
 const router = Router();
-router.get("/landing", (req, res) => {
+router.get("/", (req, res) => {
     const mentor = 5000;
     const favClass = 120;
     const trusted = 100;
@@ -18,6 +19,6 @@ router.get("/landing", (req, res) => {
     });
 });
 
-api.use("/api/", router);
+app.use("/.netlify/function/api/", router);
 
-export const handler = serverless(api);
+export const handler = serverless(app);
